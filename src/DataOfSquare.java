@@ -14,4 +14,8 @@ public class DataOfSquare {
         color=col;
         square = new SquarePanel(C.get(color));
     }
+
+    public void lightMeUp(int c){
+        square.ChangeColor(C.get(c));
+    }
 }
