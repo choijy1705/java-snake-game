@@ -5,8 +5,14 @@ public class ThreadController extends Thread{
     ArrayList<ArrayList<DataOfSquare>> squares = new ArrayList<>();
     Tuple headSnakePos;
     int sizeSnake = 3;
-    long speed = 50;
-    public static int directionOfSnake;
+    long speed = 100;
+    public static int directionSnake;
+
+    private static final int MOVE_UP = 3;
+    private static final int MOVE_DOWN = 4;
+    private static final int MOVE_RIGHT = 1;
+    private static final int MOVE_LEFT = 2;
+    private static final int NOT_MOVE = 0;
 
     ArrayList<Tuple> positions = new ArrayList<>();
     Tuple foodPosition;
@@ -15,7 +21,7 @@ public class ThreadController extends Thread{
         squares = Window.Grid;
 
         headSnakePos = new Tuple(positionDepart.x,positionDepart.y);
-        directionOfSnake = 1;
+        directionSnake = NOT_MOVE;
 
         Tuple headPos = new Tuple(headSnakePos.getX(), headSnakePos.getY());
         positions.add(headPos);
@@ -28,18 +34,18 @@ public class ThreadController extends Thread{
             squares.get(foodPosition.x).get(foodPosition.y).lightMeUp(1);
     }
 
-    @Override
     public void run() {
         while(true){
-            moveInterne(directionOfSnake);
+            moveInterne(directionSnake);
             checkCollision();
             moveExterne();
             deleteTail();
-            pauser();
+            pause();
+
         }
     }
 
-    private void pauser() {
+    private void pause() {
         try{
             sleep(speed);
         }catch(InterruptedException e){
@@ -117,17 +123,18 @@ public class ThreadController extends Thread{
     private void stopTheGame() {
         System.out.println("Collision! \n");
         while(true){
-            pauser();
+            pause();
         }
     }
 
     private void moveInterne(int dir){
+
         switch(dir){
-            case 4:
+            case MOVE_DOWN:
                 headSnakePos.ChangeData(headSnakePos.x, (headSnakePos.y+1)%20);
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
                 break;
-            case 3:
+            case MOVE_UP:
                 if(headSnakePos.y -1 <0){
                     headSnakePos.ChangeData(headSnakePos.x, 19);
                 }else{
@@ -135,7 +142,7 @@ public class ThreadController extends Thread{
                 }
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
                 break;
-            case 2:
+            case MOVE_LEFT:
                 if(headSnakePos.x -1 <0){
                     headSnakePos.ChangeData(19, headSnakePos.y);
                 }else{
@@ -143,9 +150,11 @@ public class ThreadController extends Thread{
                 }
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
                 break;
-            case 1:
+            case MOVE_RIGHT:
                 headSnakePos.ChangeData(Math.abs(headSnakePos.x+1)%20, headSnakePos.y);
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
+                break;
+            case NOT_MOVE:
                 break;
         }
     }

@@ -1,32 +1,44 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class KeyboardListener extends KeyAdapter {
+public class KeyboardListener implements KeyListener {
 
-    public void KeyPressed(KeyEvent e){
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()){
-            case 39:
-                if(ThreadController.directionOfSnake != 2){
-                    ThreadController.directionOfSnake=1;
+            case KeyEvent.VK_RIGHT:
+                if(ThreadController.directionSnake != 2){
+                    ThreadController.directionSnake =1;
                 }
                 break;
-            case 38:
-                if(ThreadController.directionOfSnake != 4){
-                    ThreadController.directionOfSnake=3;
+            case KeyEvent.VK_UP:
+                if(ThreadController.directionSnake != 4){
+                    ThreadController.directionSnake =3;
                 }
                 break;
-            case 37:
-                if(ThreadController.directionOfSnake != 1){
-                    ThreadController.directionOfSnake=2;
+            case KeyEvent.VK_LEFT:
+                if(ThreadController.directionSnake != 1){
+                    ThreadController.directionSnake =2;
                 }
                 break;
-            case 40:
-                if(ThreadController.directionOfSnake != 3){
-                    ThreadController.directionOfSnake=4;
+            case KeyEvent.VK_DOWN:
+                if(ThreadController.directionSnake != 3){
+                    ThreadController.directionSnake =4;
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

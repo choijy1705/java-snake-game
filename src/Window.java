@@ -36,7 +36,7 @@ public class Window extends JFrame {
 
         c.start();
 
-        this.addKeyListener((KeyListener) new KeyboardListener());
+        this.addKeyListener(new KeyboardListener());
 
 
 
