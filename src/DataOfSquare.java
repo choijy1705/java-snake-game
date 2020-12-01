@@ -12,6 +12,6 @@ public class DataOfSquare {
         C.add(Color.blue);
         C.add(Color.white);
         color=col;
-        square = new SquarePanel();
+        square = new SquarePanel(C.get(color));
     }
 }
