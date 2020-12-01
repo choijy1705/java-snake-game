@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class Window extends JFrame {
@@ -32,6 +33,11 @@ public class Window extends JFrame {
 
         Tuple position = new Tuple(10,10);
         ThreadController c = new ThreadController(position);
+
+        c.start();
+
+        this.addKeyListener((KeyListener) new KeyboardListener());
+
 
 
     }
