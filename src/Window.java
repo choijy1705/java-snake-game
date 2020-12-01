@@ -31,6 +31,7 @@ public class Window extends JFrame {
         }
 
         Tuple position = new Tuple(10,10);
+        ThreadController c = new ThreadController(position);
 
 
     }
